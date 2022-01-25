@@ -7,3 +7,11 @@ import 'package:equatable/equatable.dart';
   List<Object?> get props => [];
 
 }
+
+class CacheFailure extends  Failure{
+ 
+}
+
+class ServerFailure extends Failure{
+  
+}
