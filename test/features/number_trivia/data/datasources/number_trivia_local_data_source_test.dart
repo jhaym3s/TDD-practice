@@ -38,17 +38,22 @@ void main() {
         //arrange
         when(mockSharedPreferences.getString("test")).thenReturn(null);
         //act
-        final result = await localDataSourceImpl.getLastNumberTrivia();
+        final result = localDataSourceImpl.getLastNumberTrivia;
         //accert
-        verify(mockSharedPreferences.getString(cachedNumberTrivia));
-         expect(result, throwsA(const TypeMatcher<CacheException>()));
-         
+         expect(() => result(), throwsA(const TypeMatcher<CacheException>()));
             });
   });
 
   group("Cached Number Trivia", (){
-      test("", (){
-        
+    const tNumberTrivia = NumberTriviaModel(number: 1, text: "test");
+      test("Should call shared preference to cache the number", (){
+        //act
+         localDataSourceImpl.cacheNumberTrivia(tNumberTrivia);
+
+          //assert
+          final expectedJson = json.encode(tNumberTrivia.toJson());
+         
+          verify(mockSharedPreferences.setString(cachedNumberTrivia,expectedJson));
       });
   });
 }

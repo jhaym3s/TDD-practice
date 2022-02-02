@@ -22,7 +22,7 @@ class LocalDataSourceImpl implements NumberTriviaLocalDataSource{
 
   LocalDataSourceImpl({required this.sharedPreferences});
   @override
-  Future cacheNumberTrivia(NumberTriviaModel numberTriviaToCache) {
+  Future<NumberTriviaModel> getLastNumberTrivia(){
     final jsonString = sharedPreferences.getString(cachedNumberTrivia);
     if(jsonString != null){
     final result = Future.value(NumberTriviaModel.fromJson(jsonDecode(jsonString)));
@@ -33,9 +33,8 @@ class LocalDataSourceImpl implements NumberTriviaLocalDataSource{
   }
 
   @override
-  Future<NumberTriviaModel> getLastNumberTrivia() {
-    // TODO: implement getLastNumberTrivia
-    throw UnimplementedError();
+  Future<void> cacheNumberTrivia(NumberTriviaModel numberTriviaToCache) {
+    return sharedPreferences.setString(cachedNumberTrivia, json.encode(numberTriviaToCache.toJson()))  ;     
   }
   
 }
