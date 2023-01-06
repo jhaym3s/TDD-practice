@@ -7,7 +7,7 @@ import 'package:test_driven_development/features/number_trivia/domain/entities/n
 import 'package:test_driven_development/core/errors/failures.dart';
 import 'package:dartz/dartz.dart';
 import 'package:test_driven_development/features/number_trivia/domain/repositories/number_trivia_abstract_repository.dart';
-
+ typedef Future<NumberTriviaEntities> _ConcreteOrRandom();
 class NumberTriviaRepositoryImpl implements AbstractNumberTriviaRepository{
   AbstractNumberTriviaRemoteDataSource abstractNumberTriviaRemoteDataSource;
   AbstractNumberTriviaLocalDataSource abstractNumberTriviaLocalDataSource;
@@ -30,7 +30,7 @@ class NumberTriviaRepositoryImpl implements AbstractNumberTriviaRepository{
 
 
 Future<Either<Failure, NumberTriviaEntities>> _getTrivia(
-  Future<NumberTriviaEntities> Function() randomOrConcreteTrivia
+  _ConcreteOrRandom randomOrConcreteTrivia
 )async{
     if (await networkInfo.isConnected) {
        try {
