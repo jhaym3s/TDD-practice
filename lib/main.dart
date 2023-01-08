@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'injection_container.dart' as di;
 
-void main() {
+void main() async{
+  await di.init();
   runApp(const MyApp());
 }
 
@@ -45,6 +47,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
+   
     // This method is rerun every time setState is called, for instance as done
     // by the _incrementCounter method above.
     //
